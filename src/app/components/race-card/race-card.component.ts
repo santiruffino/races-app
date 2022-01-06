@@ -27,9 +27,11 @@ export class RaceCardComponent implements OnInit {
     this.races$.subscribe(races => {
       races.map((race: Race) => {
         if (race.distance <= 10) {
-          race.color = 'red';
-        } else if (race.distance > 10) {
           race.color = 'blue';
+        } else if (race.distance > 10 && race.distance < 21) {
+          race.color = 'orange';
+        } else if (race.distance >= 21) {
+          race.color = 'red';
         }
         return this.allRaces.push(race);
       });

@@ -3,10 +3,11 @@
     <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let race of allRaces">
       <div
         class="top-bar-color"
-        style="background-color:{{race.color}}"></div>
+        [style.background-color]="race.color"
+      ></div>
       <mat-card class="mat-elevation-z6">
-          <mat-card-title>{{race.name}}</mat-card-title>
-          <mat-card-subtitle>{{race.date}}</mat-card-subtitle>
+        <mat-card-title>{{race.name}}</mat-card-title>
+        <mat-card-subtitle>{{race.date}}</mat-card-subtitle>
         <mat-card-content>
           <p>
             <b>Distancia:</b> {{race.distance}}<br>
