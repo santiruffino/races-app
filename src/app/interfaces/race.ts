@@ -9,4 +9,5 @@ export interface Race {
   linkGarminActivity: string;
   linkGarminEmbed: string;
   logo: string;
+  color?: string
 }

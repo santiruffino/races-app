@@ -11,6 +11,8 @@ import { FlexModule } from "@angular/flex-layout";
 import { HttpClientModule } from "@angular/common/http";
 import { API_KEY, GoogleSheetsDbService } from 'ng-google-sheets-db';
 import { environment } from "../environments/environment";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { environment } from "../environments/environment";
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
-    FlexModule
+    FlexModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
