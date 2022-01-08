@@ -3,6 +3,8 @@ import { GoogleSheetsDbService } from "ng-google-sheets-db";
 import { Observable } from "rxjs";
 import { raceAttributesMapping } from "../../models/raceAttributesMapping.model";
 import { Race } from "../../interfaces/race";
+import * as moment from "moment";
+
 
 @Component({
   selector: 'app-race-card',
@@ -12,8 +14,6 @@ import { Race } from "../../interfaces/race";
 export class RaceCardComponent implements OnInit {
   races$: Observable<Race[]> | undefined;
   allRaces: Race[] = [];
-  name = 'iframe Garmin';
-  url: string = ''
   loading: boolean = true;
 
   constructor(
@@ -26,6 +26,9 @@ export class RaceCardComponent implements OnInit {
 
     this.races$.subscribe(races => {
       races.map((race: Race) => {
+        const newDate = moment(race.date, 'DD/MM/YYYY');
+        race.date = newDate.format('MM/DD/YYYY');
+
         if (race.distance <= 10) {
           race.color = 'blue';
         } else if (race.distance > 10 && race.distance < 21) {
@@ -35,6 +38,9 @@ export class RaceCardComponent implements OnInit {
         }
         return this.allRaces.push(race);
       });
+      this.allRaces.sort((a,b) => {
+        return <any>new Date(b.date) - <any>new Date(a.date);
+      })
       this.loading = false;
     });
   }

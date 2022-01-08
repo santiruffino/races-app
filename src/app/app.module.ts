@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -13,6 +13,10 @@ import { API_KEY, GoogleSheetsDbService } from 'ng-google-sheets-db';
 import { environment } from "../environments/environment";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { registerLocaleData } from '@angular/common';
+import _default from '@angular/common/locales/es-AR';
+
+registerLocaleData(_default);
 
 @NgModule({
   declarations: [
@@ -35,6 +39,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
       provide: API_KEY,
       useValue: environment.googleSheetsApiKey,
     },
+    { provide: LOCALE_ID, useValue: "es-AR" },
     GoogleSheetsDbService
   ],
   bootstrap: [AppComponent]
