@@ -1,34 +1,37 @@
-<div fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="100%" class="content">
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let race of allRaces">
-      <div
-        class="top-bar-color"
-        [style.background-color]="race.color"
-      ></div>
-      <mat-card class="mat-elevation-z6">
-        <mat-card-title>{{race.name}}</mat-card-title>
-        <mat-card-subtitle>{{race.date | date:'mediumDate'}}</mat-card-subtitle>
-        <mat-card-content>
-          <p>
-            <b>Distancia:</b> {{race.distance}}k<br>
-            <b>Tiempo:</b> {{race.time}}<br>
-            <b>Ritmo Promedio:</b> {{race.avgPace}}(min/km)
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <a *ngIf="race.linkGarminActivity"
-             mat-stroked-button
-             [href]="race.linkGarminActivity" target="_blank">Garmin Activity
-          </a>
-          <a *ngIf="!race.linkGarminActivity"
-             mat-stroked-button disabled
-             [href]="race.linkGarminActivity" target="_blank">Garmin Activity
-          </a>
-        </mat-card-actions>
-      </mat-card>
+<div class="all-container">
+  <div fxFlex="70%" fxFlex.xs="95%" fxFlex.sm="95%" class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <app-intro-card></app-intro-card>
+      <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let race of allRaces">
+        <div
+          class="top-bar-color"
+          [style.background-color]="race.color"
+        ></div>
+        <mat-card class="mat-elevation-z6">
+          <mat-card-title>{{race.name}}</mat-card-title>
+          <mat-card-subtitle>{{race.date | date:'mediumDate'}}</mat-card-subtitle>
+          <mat-card-content>
+            <p>
+              <b>Distancia:</b> {{race.distance}}k<br>
+              <b>Tiempo:</b> {{race.time}}<br>
+              <b>Ritmo Promedio:</b> {{race.avgPace}}(min/km)
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <a *ngIf="race.linkGarminActivity"
+               mat-stroked-button
+               [href]="race.linkGarminActivity" target="_blank">Garmin Activity
+            </a>
+            <a *ngIf="!race.linkGarminActivity"
+               mat-stroked-button disabled
+               [href]="race.linkGarminActivity" target="_blank">Garmin Activity
+            </a>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
-  </div>
-  <div *ngIf="loading" class="loading">
-    <mat-spinner></mat-spinner>
+    <div *ngIf="loading" class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
   </div>
 </div>

@@ -15,13 +15,19 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { registerLocaleData } from '@angular/common';
 import _default from '@angular/common/locales/es-AR';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatInputModule } from "@angular/material/input";
+import { ReactiveFormsModule } from "@angular/forms";
+import { IntroCardComponent } from './components/intro-card/intro-card.component';
 
 registerLocaleData(_default);
 
 @NgModule({
   declarations: [
     AppComponent,
-    RaceCardComponent
+    RaceCardComponent,
+    IntroCardComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,11 @@ registerLocaleData(_default);
     MatButtonModule,
     FlexModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
