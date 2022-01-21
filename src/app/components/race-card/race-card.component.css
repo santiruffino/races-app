@@ -9,6 +9,7 @@
 
 mat-card {
   border-radius: 0 0 10px 10px;
+  margin-bottom: 15px;
 }
 
 .top-bar-color {

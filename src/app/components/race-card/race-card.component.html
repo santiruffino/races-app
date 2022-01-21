@@ -2,32 +2,56 @@
   <div fxFlex="70%" fxFlex.xs="95%" fxFlex.sm="95%" class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <app-intro-card></app-intro-card>
-      <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let race of allRaces">
-        <div
-          class="top-bar-color"
-          [style.background-color]="race.color"
-        ></div>
-        <mat-card class="mat-elevation-z6">
-          <mat-card-title>{{race.name}}</mat-card-title>
-          <mat-card-subtitle>{{race.date | date:'mediumDate'}}</mat-card-subtitle>
-          <mat-card-content>
-            <p>
-              <b>Distancia:</b> {{race.distance}}k<br>
-              <b>Tiempo:</b> {{race.time}}<br>
-              <b>Ritmo Promedio:</b> {{race.avgPace}}(min/km)
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <a *ngIf="race.linkGarminActivity"
-               mat-stroked-button
-               [href]="race.linkGarminActivity" target="_blank">Garmin Activity
-            </a>
-            <a *ngIf="!race.linkGarminActivity"
-               mat-stroked-button disabled
-               [href]="race.linkGarminActivity" target="_blank">Garmin Activity
-            </a>
-          </mat-card-actions>
-        </mat-card>
+      <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let year of allRacesByYear">
+        <mat-accordion class="example-headers-align">
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>{{year.date}}</b>
+              </mat-panel-title>
+              <mat-panel-description>
+                <b>
+                  <small>
+                    <div *ngIf="year.games.length == 1">
+                      {{year.games.length}} carrera
+                    </div>
+                    <div *ngIf="year.games.length > 1">
+                      {{year.games.length}} carreras
+                    </div>
+                  </small>
+                </b>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngFor="let race of year.games">
+              <div
+                class="top-bar-color"
+                [style.background-color]="race.color"
+              ></div>
+              <mat-card class="mat-elevation-z6">
+                <mat-card-title>{{race.name}}</mat-card-title>
+                <mat-card-subtitle>{{race.date | date:'mediumDate'}}</mat-card-subtitle>
+                <mat-card-content>
+                  <p>
+                    <b>Distancia:</b> {{race.distance}}k<br>
+                    <b>Tiempo:</b> {{race.time}}<br>
+                    <b>Ritmo Promedio:</b> {{race.avgPace}}(min/km)
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <a *ngIf="race.linkGarminActivity"
+                     mat-stroked-button
+                     [href]="race.linkGarminActivity" target="_blank">Garmin Activity
+                  </a>
+                  <a *ngIf="!race.linkGarminActivity"
+                     mat-stroked-button disabled
+                     [href]="race.linkGarminActivity" target="_blank">Garmin Activity
+                  </a>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
     </div>
     <div *ngIf="loading" class="loading">

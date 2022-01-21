@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleSheetsDbService } from "ng-google-sheets-db";
-import { Observable } from "rxjs";
+import { groupBy, map, mergeMap, Observable, of, reduce, toArray } from "rxjs";
 import { raceAttributesMapping } from "../../models/raceAttributesMapping.model";
 import { Race } from "../../interfaces/race";
 import * as moment from "moment";
@@ -14,7 +14,9 @@ import * as moment from "moment";
 export class RaceCardComponent implements OnInit {
   races$: Observable<Race[]> | undefined;
   allRaces: Race[] = [];
+  allRacesByYear: any;
   loading: boolean = true;
+  panelOpenState = false;
 
   constructor(
     private googleSheetsDbService: GoogleSheetsDbService
@@ -40,7 +42,17 @@ export class RaceCardComponent implements OnInit {
       });
       this.allRaces.sort((a,b) => {
         return <any>new Date(b.date) - <any>new Date(a.date);
-      })
+      });
+      of(...this.allRaces).pipe(
+        groupBy((p: any) => p.date.split('/')[2]),
+        mergeMap(group$ =>
+          group$.pipe(reduce((acc, cur) => [...acc, cur], [`${group$.key}`]))
+        ),
+        map(arr => ({ date: arr[0], games: arr.slice(1) })),
+        toArray()
+      ).subscribe((p) => {
+        this.allRacesByYear = p;
+      });
       this.loading = false;
     });
   }
