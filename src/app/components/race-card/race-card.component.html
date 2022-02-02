@@ -1,8 +1,8 @@
 <div class="all-container">
   <div fxFlex="70%" fxFlex.xs="95%" fxFlex.sm="95%" class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <app-intro-card></app-intro-card>
-      <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let year of allRacesByYear">
+      <app-intro-card style="width: 100%"></app-intro-card>
+      <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let year of allRacesByYear">
         <mat-accordion class="example-headers-align">
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
